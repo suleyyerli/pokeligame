@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { router } from "expo-router";
+import { useAuth } from "../context/AuthContext";
 
 // Définition du type pour une carte
 type Card = {
@@ -29,16 +30,30 @@ const getApiUrl = () => {
 };
 
 export default function Collection() {
+  const { token, isAuthenticated } = useAuth();
   const [cards, setCards] = useState<Card[]>([]);
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/auth-modal");
+      return;
+    }
+
     axios
-      .get(`${getApiUrl()}/cards`)
+      .get(`${getApiUrl()}/cards`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => setCards(response.data))
       .catch((error) =>
         console.error("Erreur lors de la récupération des cartes :", error)
       );
-  }, []);
+  }, [isAuthenticated, token]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <View style={styles.container}>

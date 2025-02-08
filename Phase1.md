@@ -55,3 +55,13 @@ CREATE TABLE displays (
 ALTER TABLE cards
 ADD FOREIGN KEY (user_id) REFERENCES users(id);
 ```
+
+## Requete pour calculer le total via api
+
+```sql
+SELECT
+    (SELECT COALESCE(SUM(price * quantity), 0) FROM cards WHERE user_id = 1) +
+    (SELECT COALESCE(SUM(price * quantity), 0) FROM boosters WHERE user_id = 1) +
+    (SELECT COALESCE(SUM(price * quantity), 0) FROM displays WHERE user_id = 1)
+AS total_collection;
+```

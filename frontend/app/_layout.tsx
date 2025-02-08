@@ -1,21 +1,14 @@
 import { Stack } from "expo-router";
 import { LogBox } from "react-native";
+import { AuthProvider } from "./context/AuthContext";
 
 LogBox.ignoreAllLogs(true);
 
 export default function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen
-        name="(tabs)"
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="modal"
-        options={{
-          presentation: "modal",
+    <AuthProvider>
+      <Stack
+        screenOptions={{
           headerStyle: {
             backgroundColor: "#f4511e",
           },
@@ -24,7 +17,27 @@ export default function RootLayout() {
             fontWeight: "bold",
           },
         }}
-      />
-    </Stack>
+      >
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="modal"
+          options={{
+            presentation: "modal",
+          }}
+        />
+        <Stack.Screen
+          name="auth-modal"
+          options={{
+            presentation: "modal",
+            title: "Authentification",
+          }}
+        />
+      </Stack>
+    </AuthProvider>
   );
 }
