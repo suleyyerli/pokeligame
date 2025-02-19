@@ -75,3 +75,29 @@ exemple de test :
 - Collez le token reçu
 
 img getalicecards à ajoutez.
+
+## Gestion des items
+
+1. Une route POST /items pour créer :
+
+- Une carte
+- Un booster
+- Un display
+
+2. Une route GET /items pour récupérer tous les items de l'utilisateur connecté
+
+- Combine les résultats des 3 tables
+- Ajoute un champ "type" pour différencier les items
+- Ne retourne que les items de l'utilisateur connecté
+
+3. Une route DELETE /items/<string:item_type>/<int:item_id> pour supprimer un item
+
+- Vérifie le type d'item (card/booster/display)
+- Vérifie que l'item appartient à l'utilisateur
+- Supprime l'item de la bonne table
+
+4. Une route PUT /items/<string:item_type>/<int:item_id> pour modifier un item
+
+- Vérifie le type d'item (card/booster/display)
+- Vérifie que l'item appartient à l'utilisateur
+- Modifie l'item de la bonne table

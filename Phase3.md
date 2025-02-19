@@ -48,3 +48,24 @@ Résume :
 - Vérifie si l'utilisateur est authentifié
 - Redirige vers la connexion si non authentifié
 - Ajoute le token aux requêtes API
+
+## Gestion des items
+
+1. Un formulaire complet avec :
+
+- Sélecteur de type (Carte/Booster/Display)
+- Champ pour le nom
+- Sélecteur de rareté avec des étoiles (⭐)
+- Champs numériques pour la quantité et le prix
+
+2. La gestion de la soumission :
+
+- Envoi des données au backend
+- Redirection vers la collection en cas de succès
+- Affichage des erreurs si quelque chose ne va pas
+
+3. Un design simple mais fonctionnel :
+
+- Champs bien espacés
+- Boutons "Ajouter" et "Annuler"
+- Messages d'erreur en rouge
