@@ -4,8 +4,10 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   Platform,
+  Button,
+  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import { router } from "expo-router";
 import axios, { AxiosError } from "axios";
@@ -16,7 +18,7 @@ const getApiUrl = () => {
   if (Platform.OS === "web") {
     return "http://127.0.0.1:5000";
   }
-  return "http://192.168.1.105:5000";
+  return "http://172.20.10.3:5000";
 };
 
 export default function AuthModal() {
@@ -49,60 +51,79 @@ export default function AuthModal() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{isLogin ? "Connexion" : "Inscription"}</Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+    >
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollViewContent}
+        keyboardShouldPersistTaps="handled"
+      >
+        <Text style={styles.title}>
+          {isLogin ? "Connexion" : "Inscription"}
+        </Text>
 
-      {error ? <Text style={styles.error}>{error}</Text> : null}
+        {error ? <Text style={styles.error}>{error}</Text> : null}
 
-      {!isLogin && (
+        {!isLogin && (
+          <TextInput
+            style={styles.input}
+            placeholder="Nom d'utilisateur"
+            value={username}
+            onChangeText={setUsername}
+          />
+        )}
+
         <TextInput
           style={styles.input}
-          placeholder="Nom d'utilisateur"
-          value={username}
-          onChangeText={setUsername}
+          placeholder="Email"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
         />
-      )}
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="Mot de passe"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Mot de passe"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+        <Button
+          title={isLogin ? "Se connecter" : "S'inscrire"}
+          onPress={handleSubmit}
+        />
 
-      <Button
-        title={isLogin ? "Se connecter" : "S'inscrire"}
-        onPress={handleSubmit}
-      />
+        <Button
+          title={
+            isLogin
+              ? "Pas de compte ? S'inscrire"
+              : "Déjà un compte ? Se connecter"
+          }
+          onPress={() => setIsLogin(!isLogin)}
+        />
 
-      <Button
-        title={
-          isLogin
-            ? "Pas de compte ? S'inscrire"
-            : "Déjà un compte ? Se connecter"
-        }
-        onPress={() => setIsLogin(!isLogin)}
-      />
-
-      <Button title="Fermer" onPress={() => router.back()} />
-    </View>
+        <Button title="Fermer" onPress={() => router.back()} />
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollViewContent: {
     padding: 20,
+    paddingBottom: 40,
     justifyContent: "center",
   },
   title: {

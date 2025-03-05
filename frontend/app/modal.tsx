@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
-  Platform,
   TouchableOpacity,
   Alert,
   ScrollView,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { router, useLocalSearchParams } from "expo-router";
@@ -89,95 +89,101 @@ export default function Modal() {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
     >
-      <ScrollView style={styles.scrollView}>
-        <Text style={styles.title}>
-          {isEditMode ? "Modifier un item" : "Ajouter un item"}
-        </Text>
+      <ScrollView
+        contentContainerStyle={styles.scrollViewContent}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={styles.formContainer}>
+          <Text style={styles.title}>
+            {isEditMode ? "Modifier un item" : "Ajouter un item"}
+          </Text>
 
-        <View style={styles.form}>
-          <Text style={styles.label}>Type :</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={type}
-              onValueChange={(value: string) => setType(value)}
-              enabled={!isEditMode}
-              style={[styles.picker, isEditMode && styles.disabledPicker]}
-            >
-              {ITEM_TYPES.map((item) => (
-                <Picker.Item
-                  key={item.value}
-                  label={item.label}
-                  value={item.value}
-                />
-              ))}
-            </Picker>
-          </View>
+          <View style={styles.form}>
+            <Text style={styles.label}>Type :</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={type}
+                onValueChange={(value: string) => setType(value)}
+                enabled={!isEditMode}
+                style={[styles.picker, isEditMode && styles.disabledPicker]}
+              >
+                {ITEM_TYPES.map((item) => (
+                  <Picker.Item
+                    key={item.value}
+                    label={item.label}
+                    value={item.value}
+                  />
+                ))}
+              </Picker>
+            </View>
 
-          <Text style={styles.label}>Nom :</Text>
-          <TextInput
-            style={styles.input}
-            value={name}
-            onChangeText={setName}
-            placeholder="Nom de l'item"
-            returnKeyType="done"
-          />
+            <Text style={styles.label}>Nom :</Text>
+            <TextInput
+              style={styles.input}
+              value={name}
+              onChangeText={setName}
+              placeholder="Nom de l'item"
+              returnKeyType="done"
+            />
 
-          <Text style={styles.label}>Rareté :</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={rarity}
-              onValueChange={(value: string) => setRarity(value)}
-              style={styles.picker}
-            >
-              {RARITY_OPTIONS.map((item) => (
-                <Picker.Item
-                  key={item.value}
-                  label={item.label}
-                  value={item.value.toString()}
-                />
-              ))}
-            </Picker>
-          </View>
+            <Text style={styles.label}>Rareté :</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={rarity}
+                onValueChange={(value: string) => setRarity(value)}
+                style={styles.picker}
+              >
+                {RARITY_OPTIONS.map((item) => (
+                  <Picker.Item
+                    key={item.value}
+                    label={item.label}
+                    value={item.value.toString()}
+                  />
+                ))}
+              </Picker>
+            </View>
 
-          <Text style={styles.label}>Quantité :</Text>
-          <TextInput
-            style={styles.input}
-            value={quantity}
-            onChangeText={setQuantity}
-            keyboardType="numeric"
-            placeholder="Quantité"
-            returnKeyType="done"
-          />
+            <Text style={styles.label}>Quantité :</Text>
+            <TextInput
+              style={styles.input}
+              value={quantity}
+              onChangeText={setQuantity}
+              keyboardType="numeric"
+              placeholder="Quantité"
+              returnKeyType="done"
+            />
 
-          <Text style={styles.label}>Prix :</Text>
-          <TextInput
-            style={styles.input}
-            value={price}
-            onChangeText={setPrice}
-            keyboardType="numeric"
-            placeholder="Prix en euros"
-            returnKeyType="done"
-          />
+            <Text style={styles.label}>Prix :</Text>
+            <TextInput
+              style={styles.input}
+              value={price}
+              onChangeText={setPrice}
+              keyboardType="numeric"
+              placeholder="Prix en euros"
+              returnKeyType="done"
+            />
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={[styles.button, styles.submitButton]}
-              onPress={handleSubmit}
-            >
-              <Text style={styles.buttonText}>
-                {isEditMode ? "Modifier" : "Ajouter"}
-              </Text>
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={[styles.button, styles.submitButton]}
+                onPress={handleSubmit}
+              >
+                <Text style={styles.buttonText}>
+                  {isEditMode ? "Modifier" : "Ajouter"}
+                </Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={[styles.button, styles.cancelButton]}
-              onPress={() => router.back()}
-            >
-              <Text style={styles.buttonText}>Annuler</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.button, styles.cancelButton]}
+                onPress={() => router.back()}
+              >
+                <Text style={styles.buttonText}>Annuler</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -190,9 +196,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
   },
-  scrollView: {
-    flex: 1,
+  scrollViewContent: {
+    flexGrow: 1,
+  },
+  formContainer: {
     padding: 20,
+    paddingBottom: 200,
   },
   title: {
     fontSize: 24,
@@ -202,7 +211,6 @@ const styles = StyleSheet.create({
   },
   form: {
     gap: 8,
-    paddingBottom: 40,
   },
   label: {
     fontSize: 16,
@@ -232,7 +240,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     gap: 10,
-    marginTop: 10,
+    marginTop: 20,
   },
   button: {
     padding: 15,

@@ -37,10 +37,8 @@ Application de gestion de collection Pokémon permettant aux utilisateurs de gé
 ### Phase 4 - Fonctionnalités de Prix
 
 - Implémentation du système de suivi des prix
-  - Interface de mise à jour manuelle des prix
   - Graphiques d'évolution des prix
   - Calcul de la valeur totale de la collection
-  - Système d'alertes de prix
 
 ### Phase 5 - Fonctionnalités Avancées
 

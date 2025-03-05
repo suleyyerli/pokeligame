@@ -1,5 +1,6 @@
 import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+
 export default function TabsLayout() {
   return (
     <Tabs
@@ -27,6 +28,15 @@ export default function TabsLayout() {
           headerTitle: "Collection",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="list" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="stats"
+        options={{
+          headerTitle: "Statistiques",
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="bar-chart" size={24} color={color} />
           ),
         }}
       />

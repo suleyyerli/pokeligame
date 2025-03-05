@@ -30,7 +30,7 @@ const getApiUrl = () => {
     return "http://127.0.0.1:5000";
   }
   // Adresse IP de votre ordinateur sur le réseau local
-  return "http://192.168.1.105:5000";
+  return "http://172.20.10.3:5000";
 };
 
 export default function Collection() {
