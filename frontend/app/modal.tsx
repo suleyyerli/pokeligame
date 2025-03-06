@@ -15,6 +15,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import axios from "axios";
 import { useAuth } from "./context/AuthContext";
 import { getApiUrl } from "./utils/config";
+import { BounceAnimation } from "./animations/BounceAnimation";
 
 const RARITY_OPTIONS = [
   { label: "⭐", value: 1 },
@@ -103,22 +104,45 @@ export default function Modal() {
           </Text>
 
           <View style={styles.form}>
-            <Text style={styles.label}>Type :</Text>
-            <View style={styles.pickerContainer}>
-              <Picker
-                selectedValue={type}
-                onValueChange={(value: string) => setType(value)}
-                enabled={!isEditMode}
-                style={[styles.picker, isEditMode && styles.disabledPicker]}
-              >
-                {ITEM_TYPES.map((item) => (
-                  <Picker.Item
-                    key={item.value}
-                    label={item.label}
-                    value={item.value}
-                  />
-                ))}
-              </Picker>
+            <View style={styles.pickersRow}>
+              <View style={styles.pickerWrapper}>
+                <Text style={styles.label}>Type :</Text>
+                <View style={styles.pickerContainer}>
+                  <Picker
+                    selectedValue={type}
+                    onValueChange={(value: string) => setType(value)}
+                    enabled={!isEditMode}
+                    style={[styles.picker, isEditMode && styles.disabledPicker]}
+                  >
+                    {ITEM_TYPES.map((item) => (
+                      <Picker.Item
+                        key={item.value}
+                        label={item.label}
+                        value={item.value}
+                      />
+                    ))}
+                  </Picker>
+                </View>
+              </View>
+
+              <View style={styles.pickerWrapper}>
+                <Text style={styles.label}>Rareté :</Text>
+                <View style={styles.pickerContainer}>
+                  <Picker
+                    selectedValue={rarity}
+                    onValueChange={(value: string) => setRarity(value)}
+                    style={styles.picker}
+                  >
+                    {RARITY_OPTIONS.map((item) => (
+                      <Picker.Item
+                        key={item.value}
+                        label={item.label}
+                        value={item.value.toString()}
+                      />
+                    ))}
+                  </Picker>
+                </View>
+              </View>
             </View>
 
             <Text style={styles.label}>Nom :</Text>
@@ -130,42 +154,31 @@ export default function Modal() {
               returnKeyType="done"
             />
 
-            <Text style={styles.label}>Rareté :</Text>
-            <View style={styles.pickerContainer}>
-              <Picker
-                selectedValue={rarity}
-                onValueChange={(value: string) => setRarity(value)}
-                style={styles.picker}
-              >
-                {RARITY_OPTIONS.map((item) => (
-                  <Picker.Item
-                    key={item.value}
-                    label={item.label}
-                    value={item.value.toString()}
-                  />
-                ))}
-              </Picker>
+            <View style={styles.inputsRow}>
+              <View style={styles.inputWrapper}>
+                <Text style={styles.label}>Quantité :</Text>
+                <TextInput
+                  style={styles.input}
+                  value={quantity}
+                  onChangeText={setQuantity}
+                  keyboardType="numeric"
+                  placeholder="Quantité"
+                  returnKeyType="done"
+                />
+              </View>
+
+              <View style={styles.inputWrapper}>
+                <Text style={styles.label}>Prix :</Text>
+                <TextInput
+                  style={styles.input}
+                  value={price}
+                  onChangeText={setPrice}
+                  keyboardType="numeric"
+                  placeholder="Prix en euros"
+                  returnKeyType="done"
+                />
+              </View>
             </View>
-
-            <Text style={styles.label}>Quantité :</Text>
-            <TextInput
-              style={styles.input}
-              value={quantity}
-              onChangeText={setQuantity}
-              keyboardType="numeric"
-              placeholder="Quantité"
-              returnKeyType="done"
-            />
-
-            <Text style={styles.label}>Prix :</Text>
-            <TextInput
-              style={styles.input}
-              value={price}
-              onChangeText={setPrice}
-              keyboardType="numeric"
-              placeholder="Prix en euros"
-              returnKeyType="done"
-            />
 
             <View style={styles.buttonContainer}>
               <TouchableOpacity
@@ -175,6 +188,12 @@ export default function Modal() {
                 <Text style={styles.buttonText}>
                   {isEditMode ? "Modifier" : "Ajouter"}
                 </Text>
+                <BounceAnimation
+                  source={require("../assets/images/pokemon/pokemon_balls.gif")}
+                  size={30}
+                  duration={1500}
+                  bounceHeight={8}
+                />
               </TouchableOpacity>
 
               <TouchableOpacity
@@ -182,6 +201,12 @@ export default function Modal() {
                 onPress={() => router.back()}
               >
                 <Text style={styles.buttonText}>Annuler</Text>
+                <BounceAnimation
+                  source={require("../assets/images/pokemon/pokemon_balls.gif")}
+                  size={30}
+                  duration={1500}
+                  bounceHeight={8}
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -201,7 +226,7 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     padding: 20,
-    paddingBottom: 200,
+    paddingBottom: 300,
   },
   title: {
     fontSize: 24,
@@ -225,11 +250,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     marginBottom: 12,
   },
+  pickersRow: {
+    flexDirection: "row",
+    gap: 10,
+    marginBottom: 12,
+    justifyContent: "space-between",
+  },
+  pickerWrapper: {
+    width: "45%",
+  },
   pickerContainer: {
     borderWidth: 1,
     borderColor: "#ddd",
     borderRadius: 8,
-    marginBottom: 12,
     backgroundColor: "#fff",
   },
   picker: {
@@ -241,21 +274,35 @@ const styles = StyleSheet.create({
   buttonContainer: {
     gap: 10,
     marginTop: 20,
+    borderRadius: 10,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "center",
   },
   button: {
     padding: 15,
     borderRadius: 8,
     alignItems: "center",
+    flexDirection: "row",
+    gap: 4,
   },
   submitButton: {
-    backgroundColor: "#4a90e2",
+    backgroundColor: "#3B4CCA",
   },
   cancelButton: {
-    backgroundColor: "#e74c3c",
+    backgroundColor: "#FF0000",
   },
   buttonText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
+  },
+  inputsRow: {
+    flexDirection: "row",
+    gap: 10,
+    marginBottom: 12,
+  },
+  inputWrapper: {
+    flex: 1,
   },
 });

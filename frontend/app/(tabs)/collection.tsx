@@ -6,13 +6,12 @@ import {
   StyleSheet,
   Button,
   Platform,
-  TouchableOpacity,
   Alert,
 } from "react-native";
 import axios from "axios";
 import { router } from "expo-router";
 import { useAuth } from "../context/AuthContext";
-import { Ionicons } from "@expo/vector-icons";
+import { CardItem } from "../components/CardItem";
 
 // Définition du type pour une carte
 type Card = {
@@ -103,32 +102,10 @@ export default function Collection() {
         data={cards}
         keyExtractor={(item) => `${item.type}-${item.id}`}
         renderItem={({ item }) => (
-          <View style={styles.card}>
-            <View style={styles.cardContent}>
-              <View>
-                <Text>Type: {item.type}</Text>
-                <Text>Nom: {item.name}</Text>
-                <Text>Rareté: {"⭐".repeat(item.rarity)}</Text>
-                <Text>Quantité: {item.quantity}</Text>
-                <Text>Prix: {item.price} €</Text>
-              </View>
-              <View style={styles.cardActions}>
-                <TouchableOpacity
-                  onPress={() => handleEdit(item)}
-                  style={styles.editButton}
-                >
-                  <Ionicons name="pencil" size={24} color="#4a90e2" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => deleteItem(item)}
-                  style={styles.deleteButton}
-                >
-                  <Ionicons name="trash" size={24} color="red" />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </View>
+          <CardItem item={item} onEdit={handleEdit} onDelete={deleteItem} />
         )}
+        contentContainerStyle={{ paddingHorizontal: 16 }}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );
@@ -137,41 +114,23 @@ export default function Collection() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    alignItems: "center",
+    backgroundColor: "#f5f5f5",
+    width: "100%",
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
+    paddingHorizontal: 16,
     marginBottom: 16,
+    marginTop: 16,
   },
   title: {
-    fontSize: 22,
+    fontSize: 28,
     fontWeight: "bold",
-    marginBottom: 16,
-  },
-  card: {
-    padding: 12,
-    backgroundColor: "#FFFFFF",
-    marginBottom: 8,
-    borderRadius: 8,
-  },
-  cardContent: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    marginBottom: 24,
+    color: "#2c3e50",
+    textAlign: "center",
     width: "100%",
-  },
-  cardActions: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-  },
-  editButton: {
-    padding: 8,
-  },
-  deleteButton: {
-    padding: 8,
   },
 });
