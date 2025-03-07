@@ -40,25 +40,13 @@ Application de gestion de collection Pokémon permettant aux utilisateurs de gé
   - Graphiques d'évolution des prix
   - Calcul de la valeur totale de la collection
 
-### Phase 5 - Fonctionnalités Avancées
-
-- Ajout de fonctionnalités enrichies
-  - Scanner de cartes via appareil photo
-  - Import/Export de collection
-  - Système de wishlist
-  - Statistiques avancées
-  - Suggestions d'achat/vente
-
-### Phase 6 - Optimisation et Améliorations
+### Phase 5 - Optimisation et Améliorations
 
 - Optimisations techniques
-  - Mise en cache des données
-  - Optimisation des performances
   - Amélioration de l'UX
-  - Tests unitaires et d'intégration
   - Documentation utilisateur
 
-### Phase 7 - Fonctionnalités Sociales (Optionnel)
+### Phase 6 - Fonctionnalités Sociales (Optionnel)
 
 - Fonctionnalités communautaires
   - Partage de collection

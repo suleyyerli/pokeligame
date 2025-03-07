@@ -1,5 +1,6 @@
 import { Tabs } from "expo-router";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Image } from "react-native";
 
 export default function TabsLayout() {
   return (
@@ -17,6 +18,7 @@ export default function TabsLayout() {
         name="index"
         options={{
           headerTitle: "Acceuil",
+          tabBarLabel: "Acceuil",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" color={color} size={size} />
           ),
@@ -27,7 +29,10 @@ export default function TabsLayout() {
         options={{
           headerTitle: "Collection",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="list" color={color} size={size} />
+            <Image
+              source={require("../../assets/images/pokemon/collect.gif")}
+              style={{ width: 24, height: 24 }}
+            />
           ),
         }}
       />

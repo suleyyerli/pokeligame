@@ -12,14 +12,7 @@ import {
 import { router } from "expo-router";
 import axios, { AxiosError } from "axios";
 import { useAuth } from "./context/AuthContext";
-
-// Fonction pour obtenir l'URL de l'API
-const getApiUrl = () => {
-  if (Platform.OS === "web") {
-    return "http://127.0.0.1:5000";
-  }
-  return "http://172.20.10.3:5000";
-};
+import { getApiUrl } from "./utils/config";
 
 export default function AuthModal() {
   const { setToken } = useAuth();

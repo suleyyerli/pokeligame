@@ -1,8 +1,9 @@
 import { Platform } from "react-native";
 
 export const getApiUrl = () => {
-  if (Platform.OS === "web") {
-    return "http://127.0.0.1:5000";
-  }
-  return "http://172.20.10.3:5000";
+  const baseUrl =
+    Platform.OS === "web"
+      ? "http://127.0.0.1:5000"
+      : "http://192.168.1.105:5000";
+  return `${baseUrl}/api`;
 };

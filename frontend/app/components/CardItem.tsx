@@ -123,11 +123,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+    position: "relative",
   },
   cardContent: {
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
+    marginBottom: 40,
   },
   cardImage: {
     width: 80,
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
     gap: 8,
     position: "absolute",
     right: 12,
-    top: 12,
+    bottom: 12,
     zIndex: 1,
   },
   editButton: {

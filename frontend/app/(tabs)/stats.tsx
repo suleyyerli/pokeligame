@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#ffffff",
     marginBottom: 10,
+    borderRadius: 10,
   },
   title: {
     fontSize: 24,

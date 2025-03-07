@@ -12,6 +12,7 @@ import axios from "axios";
 import { router } from "expo-router";
 import { useAuth } from "../context/AuthContext";
 import { CardItem } from "../components/CardItem";
+import { getApiUrl } from "../utils/config";
 
 // Définition du type pour une carte
 type Card = {
@@ -21,15 +22,6 @@ type Card = {
   rarity: number;
   quantity: number;
   price: number;
-};
-
-// Fonction pour obtenir l'URL de l'API
-const getApiUrl = () => {
-  if (Platform.OS === "web") {
-    return "http://127.0.0.1:5000";
-  }
-  // Adresse IP de votre ordinateur sur le réseau local
-  return "http://172.20.10.3:5000";
 };
 
 export default function Collection() {
