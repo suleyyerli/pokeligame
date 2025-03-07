@@ -1,12 +1,23 @@
 # Documentation PokeLigame
 
+![imgtitle](img/pokeligame-txt.png)
+
 ## 1. Introduction
 
 ### Présentation du Projet
 
 **Pokeligame** est une application mobile de gestion de collection de cartes de booster et de display Pokémon. Cette application permet aux utilisateurs de suivre leur collection personnelle de cartes de booster et de display, tout en évaluant la valeur totale de leur collection. L'utilisateur peut mettre à jour les prix et les quantités de ses items au fur et à mesure.
 
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+    <img src="img/acceuil.png" width="300" alt="Accueil">
+    <img src="img/collection.png" width="300" alt="Collection">
+    <img src="img/statistique.png" width="300" alt="Statistiques">
+    <img src="img/formulaire.png" width="300" alt="Formulaire">
+</div>
+
 ### Stack Technologique
+
+![imgtitle](img/stack.png)
 
 - **Backend**: `Flask` (Python)
 - **Frontend**: `React Native`
@@ -20,9 +31,8 @@
 La gestion d'une collection de cartes de booster et de display Pokémon peut devenir complexe avec le temps, notamment en ce qui concerne :
 
 > - Le suivi de la valeur de la collection
-> - La gestion des différents types d'items (cartas de booster, displays)
-> - L'organisation des items par rareté
 > - La mise à jour des prix et des quantités
+> - Complexité pour accéder à sa collection de partout
 > - La sécurité des données utilisateur
 
 ## 2. Cahier des Charges
@@ -37,7 +47,8 @@ La gestion d'une collection de cartes de booster et de display Pokémon peut dev
 
 #### 2. **Gestion de la Collection**
 
-- Ajout de cartes de booster à la collection
+- Ajout de cartes à la collection
+- Ajout de booster à la collection
 - Ajout de displays à la collection
 - Suivi des quantités possédées
 - Catégorisation par rareté
@@ -47,13 +58,11 @@ La gestion d'une collection de cartes de booster et de display Pokémon peut dev
 #### 3. **Gestion des Items**
 
 - Gestion unifiée des cartes de booster et displays
-- Suivi des stocks
 - Mise à jour des prix et quantités
-- Historique des modifications
 
 ### Diagramme de Cas d'Utilisation
 
-[À compléter avec votre schéma]
+![imgtitle](img/casutilisation.png)
 
 ### Charte Graphique et UI Kit
 
@@ -132,6 +141,8 @@ La gestion d'une collection de cartes de booster et de display Pokémon peut dev
 - Intégration des API
 - Tests utilisateur
 
+![imgtitle](img/orga.png)
+
 ## 3. Base de Données
 
 > La structure de la base de données a été conçue pour répondre aux besoins spécifiques de la gestion d'une collection de cartes Pokémon. Le choix de MySQL s'est imposé pour sa robustesse et sa facilité d'utilisation. La séparation en trois tables distinctes (cards, boosters, displays) permet une gestion claire et efficace des différents types d'items, tout en maintenant une cohérence dans la structure des données. Cette architecture facilite les requêtes complexes et permet une évolution future de l'application.
@@ -175,7 +186,7 @@ La gestion d'une collection de cartes de booster et de display Pokémon peut dev
 
 ### Schéma de la Base de Données
 
-[À compléter avec votre schéma]
+![imgtitle](img/db.png)
 
 ## 4. Backend et Fonctionnalités
 
@@ -384,7 +395,7 @@ Cette route calcule la valeur totale de la collection. Elle :
 
 ### Tests avec Insomnia
 
-[À compléter avec vos captures d'écran Insomnia]
+![imgtitle](img/insomnia.png)
 
 ### Fonctionnalités Backend
 
@@ -454,6 +465,15 @@ frontend/
 ├── package.json            # Dépendances Node.js
 └── tsconfig.json          # Configuration TypeScript
 ```
+
+### WIREFRAME
+
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+    <img src="img/wireacceuil.png" width="300" alt="Wireframe Accueil">
+    <img src="img/wirecollection.png" width="300" alt="Wireframe Collection">
+    <img src="img/wirestats.png" width="300" alt="Wireframe Stats">
+    <img src="img/wireformulaire.png" width="300" alt="Wireframe Formulaire">
+</div>
 
 ### Exemples de Code Frontend
 
@@ -663,6 +683,10 @@ export default function Collection() {
 
 #### **Composants UI**
 
+![imgtitle](img/buttonadd.png)
+![imgtitle](img/buttonauth.png)
+![imgtitle](img/nav.png)
+
 - **Modals**
   - Authentification
   - Ajout d'item à la collection
@@ -684,3 +708,7 @@ export default function Collection() {
 #### **Animations**
 
 - Utilisation de modal
+
+## 6. Conclusion
+
+PokeLigame est une application mobile qui répond à un besoin réel des collectionneurs Pokémon. En utilisant des technologies modernes comme React Native pour le frontend et Flask pour le backend, une solution complète et facile à utiliser.
