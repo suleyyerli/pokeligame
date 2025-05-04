@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@types/react": "~19.0.10",
+    "jest-expo": "~53.0.4"
+  }
+}
